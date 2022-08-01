@@ -183,7 +183,11 @@ function UICtrl($scope, ThreeJS, WorkerManager, Motors, Radios) {
   };
 
   $scope.mouse_wheel = function (event, delta, deltaX, deltaY){
-    event.preventDefault();
+    try{
+      event.preventDefault();
+    }catch(e){
+
+    }
     ThreeJS.zoom_camera_for_scroll_delta(delta);
   };
 

@@ -148,7 +148,6 @@ function ThreeJS (WorkerManager) {
     var pivot_delta_rot_Y = -mouse_delta_X/WIDTH*Math.PI*6;
     var new_pivot_rot_y = space_camera_pivot.rotation.y + pivot_delta_rot_Y;
     var camera_rotation_target = { y: new_pivot_rot_y };
-
     var tween = new TWEEN.Tween(camera_rotation_start).to(camera_rotation_target, 500);
     tween.onUpdate(function(){
       space_camera_pivot.rotation.y = camera_rotation_start.y;
@@ -186,6 +185,7 @@ function ThreeJS (WorkerManager) {
   function pivot_camera_for_mouse_deltas (mouse_delta_X, mouse_delta_Y) {
     if (!ground_camera_flag){
       // Don't move the space camera if we are using the ground camera
+      // console.log("Here1 ", ...arguments);
       camera_left_right_pivot (mouse_delta_X);
       camera_up_down_pivot (mouse_delta_Y);
     };
@@ -195,6 +195,7 @@ function ThreeJS (WorkerManager) {
     // Move camera inwards when user scrolls up
     // Move camera out when user scrolls down.
     if (!ground_camera_flag){
+      if(isNaN(delta)) return;
       // Don't move the space camera is we are using the ground camera
       var new_camera_position = delta*1000 + space_camera.position.x;
       if (new_camera_position < 10000){
